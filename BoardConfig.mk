@@ -1,5 +1,4 @@
 #
-# Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,20 @@
 
 -include vendor/motorola/cedric/BoardConfigVendor.mk
 
-DEVICE_PATH := device/motorola/cedric
+DEVICE_PATH := device/motorola/perry
+
+# Asserts
+TARGET_OTA_ASSERT_DEVICE := perry,perry_retail,sperry
+TARGET_KERNEL_CONFIG := perry_defconfig
+TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
+
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_perry
+TARGET_RECOVERY_DEVICE_MODULES := libinit_perry
+
+# Partitions
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3623878656    #  3538944 * 1024 mmcblk0p53
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 10768858112 # 10516463 * 1024 mmcblk0p54
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
@@ -49,9 +61,6 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 TARGET_USES_64_BIT_BINDER := true
 
-# Asserts
-TARGET_OTA_ASSERT_DEVICE := cedric,cedric_retail
-
 # Enable dexpreopt to speed boot time
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
@@ -80,7 +89,6 @@ BOARD_DTBTOOL_ARGS := --force-v3 --motorola 1
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CONFIG := cedric_defconfig
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8937
 KERNEL_TOOLCHAIN := $(PWD)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-androidkernel-
@@ -182,15 +190,6 @@ TARGET_PROVIDES_LIBLIGHT := true
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/configs/compatibility_matrix.xml
 
-# Partitions
-BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216        #    16384 * 1024 mmcblk0p37
-BOARD_CACHEIMAGE_PARTITION_SIZE := 260014080      #   253920 * 1024 mmcblk0p52
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432    #    16484 * 1024 mmcblk0p38
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3455451136    #  3428080 * 1024 mmcblk0p53
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 26401026048 # 25782252 * 1024 mmcblk0p54
-
 # Peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
@@ -267,3 +266,6 @@ WIFI_DRIVER_FW_PATH_AP           := "ap"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_P2P          := "p2p"
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
+
+# SELinux
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy

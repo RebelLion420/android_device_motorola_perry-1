@@ -11,3 +11,6 @@ allow fingerprintd sysfs_fpc:file rw_file_perms;
 allow fingerprintd tee_device:chr_file { ioctl open read write };
 allow fingerprintd uhid_device:chr_file rw_file_perms;
 allow fingerprintd sysfs:file { write };
+allow fingerprintd etsd_service:service_manager find;
+allow fingerprintd power_service:service_manager find;
+binder_call(fingerprintd, etsd)

@@ -1,5 +1,4 @@
 #
-# Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +54,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 
 # Screen density
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_AAPT_CONFIG := normal
 
 # Audio
@@ -305,11 +304,34 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-oem.xml:system/etc/permissions/privapp-permissions-oem.xml \
     $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
 
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
+# APN Config for Stock
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/stockapn/apns-conf.xml:system/etc/stockapn/apns-conf.xml
+
+# Audio
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/configs/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/configs/audio_platform_info_extcodec.xml:system/etc/audio_platform_info_extcodec.xml
+
+# Camera
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/msm8917_mot_perry_camera.xml:system/etc/camera/msm8917_mot_perry_camera.xml \
+    $(LOCAL_PATH)/configs/camera/imx219_chromatix.xml:system/etc/camera/imx219_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/s5k4h8_chromatix.xml:system/etc/camera/s5k4h8_chromatix.xml \
+	$(LOCAL_PATH)/configs/camera/mot_ov5695_l5695fa0_chromatix.xml:system/etc/camera/mot_ov5695_l5695fa0_chromatix.xml
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.qcom.fm.sh \
-    wlan_carrier_bin.sh
+    wlan_carrier_bin.sh \
+    init.target.rc
 
+<<<<<<< HEAD
 PRODUCT_PACKAGES += \
     fstab.qcom \
     init.mmi.boot.sh \
@@ -378,7 +400,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-cedric.conf:system/vendor/etc/thermal-engine.conf
+    $(LOCAL_PATH)/configs/thermal-engine-perry.conf:system/etc/thermal-engine-perry.conf
 
 # Touch HAL
 PRODUCT_PACKAGES += \
@@ -451,3 +473,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.media_vol_steps=20
 
 PRODUCT_GMS_CLIENTID_BASE := android-motorola
+
+# Inherit from msm8937-common
+$(call inherit-product, device/motorola/msm8937-common/msm8937.mk)
