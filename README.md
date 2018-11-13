@@ -7,7 +7,7 @@ Motorola Mobility. It was announced in June 2017.
 Basic   | Spec Sheet
 -------:|:-------------------------
 CPU     | Quad-core 1.4 GHz Cortex-A53
-Chipset | Qualcomm MSM8917 Snapdragon 425
+Chipset | Qualcomm MSM8917/MSM8920(sperry) Snapdragon 425/427(sperry)
 GPU     | Adreno 308
 Memory  | 2 GB RAM
 Shipped Android Version | 7.1.1
