@@ -1,7 +1,7 @@
 Unified Device Tree for Moto E4 Qualcomm (perry)
 ================================================
 
-The Motorola Moto E4 (codenamed _"perry"_) is a low-range smartphone from
+The Motorola Moto E4 (codenamed _"perry"_ and _"sperry"_) is a low-range smartphone from
 Motorola Mobility. It was announced in June 2017.
 
 Basic   | Spec Sheet
